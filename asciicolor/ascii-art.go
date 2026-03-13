@@ -1,7 +1,6 @@
 package colorize
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -20,23 +19,27 @@ func AsciiArt(input string, bannerlines []string, color string, positions []bool
 
 	for _, char := range textsplit {
 		if char == "" {
-			fmt.Println()
+			result += "\n"
+			globalpos++
 			continue
 		}
+		rowString := make([]string, 8)
 
-		for row := 0; row < 8; row++ {
-			var rowString string
-			for col := 0; col < len(char); col++ {
-				post := int(char[col]-32) * 9
+		for col := 0; col < len(char); col++ {
+			post := int(char[col]-32) * 9
+
+			for row := 0; row < 8; row++ {
+
 				if color != "" && positions[globalpos] == true {
-					rowString += color + bannerlines[row+post] + "\033[0m"
+					rowString[row] += color + bannerlines[row+post] + "\033[0m"
 				} else {
-					rowString += bannerlines[row+post]
+					rowString[row] += bannerlines[row+post]
 				}
-				globalpos++
 			}
-			result += rowString + "\n"
-
+			globalpos++
+		}
+		for _, row := range rowString {
+			result += row + "\n"
 		}
 
 	}

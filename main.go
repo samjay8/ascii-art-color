@@ -39,5 +39,10 @@ func main() {
 	for scanner.Scan() {
 		bannerlines = append(bannerlines, scanner.Text())
 	}
-	fmt.Println(input, substring, color)
+
+	positions := colorize.ColoredPositions(input, substring)
+
+	result := colorize.AsciiArt(input, bannerlines, color, positions)
+
+	fmt.Print(result)
 }
