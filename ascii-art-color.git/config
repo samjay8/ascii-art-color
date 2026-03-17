@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://acad.learn2earn.ng/git/sojetund/ascii-art-color.git
+	fetch = +refs/*:refs/*
+	mirror = true
