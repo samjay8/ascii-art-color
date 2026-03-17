@@ -16,8 +16,16 @@ func ParseColor(flag string) string {
 		"white":   "\033[37m",
 	}
 
-	parts := strings.Split(flag, "=") //SPlits the flag based on the delimiter "="
-	if parts[0] != "--color" {        // Checks if the first part is not equal to the flag and returns Usage.
+	find := strings.HasPrefix(flag, "--color=")
+
+	if find != true {
+		fmt.Println("Usage: go run . [OPTION] [STRING] EX: go run . --color=<color> <substring to be colored> \"something\"")
+		return ""
+	}
+
+	parts := strings.Split(flag, "=") //Splits the flag based on the delimiter "="
+
+	if parts[0] != "--color" { // Checks if the first part is not equal to the flag and returns Usage.
 		fmt.Println("Usage: go run . [OPTION] [STRING] EX: go run . --color=<color> <substring to be colored> \"something\"")
 		return ""
 	}
