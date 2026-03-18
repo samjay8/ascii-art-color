@@ -27,7 +27,7 @@ func main() {
 		substring = os.Args[2] // Takes arguments[2] as substring
 		input = os.Args[3]     // Takes arguments[3] as the input
 	} else {
-		fmt.Println("Usage: goereww1` run . [OPTION] [STRING] EX: go run . --color=<color> <substring to be colored> \"something\"") //Else, handle error
+		fmt.Println("Usage: go run . [OPTION] [STRING] EX: go run . --color=<color> <substring to be colored> \"something\"") //Else, handle error
 	}
 
 	file, err := os.Open("standard.txt") // Opens the banner file
