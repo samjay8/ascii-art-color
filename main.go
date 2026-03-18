@@ -5,23 +5,27 @@ import (
 	colorize "colorize/asciicolor"
 	"fmt"
 	"os"
-	"strings"
 )
 
 func main() {
 	var input, substring string
 	var color string
 
+	for i, arg := range os.Args {
+		fmt.Printf("arg[%d] = %q\n", i, arg)
+	}
 	if len(os.Args) == 2 { // Checks for when the length of arguments in the terminal is equal 2
 		input = os.Args[1] // Takes arguments [1] as input after go run . on the terminal
 
 	} else if len(os.Args) == 3 { // Checks for when the length of arguments in the terminal is equal 3
 		color = colorize.ParseColor(os.Args[1]) // Takes arguments[1] as the color
-		input = os.Args[2]                      // Takes arguments[2] as the input
+		if color == "" {
+			return
+		}
+		input = os.Args[2] // Takes arguments[2] as the input
 	} else if len(os.Args) == 4 { // Checks for when the length of arguments in the terminal is equal
 		color = colorize.ParseColor(os.Args[1]) // Takes arguments[1] as the color
-		find := strings.HasPrefix(color, "--color=")
-		if find != true {
+		if color == "" {
 			return
 		}
 		substring = os.Args[2] // Takes arguments[2] as substring
@@ -34,6 +38,7 @@ func main() {
 
 	if err != nil {
 		fmt.Println("Error Opening file", err) // If err is not empty, handle the error
+		return
 	}
 	defer file.Close() // Close the file after banner file has been read
 

@@ -29,11 +29,10 @@ func AsciiArt(input string, bannerlines []string, color string, positions []bool
 			post := int(char[col]-32) * 9 // Calculates the position of exact character
 
 			for row := 0; row < 8; row++ { // For each 8 segments the character has to pass through
-
 				if color != "" && positions[globalpos] == true { // If the color is not empty and the character in position is true
-					rowString[row] += color + bannerlines[row+post] + "\033[0m" // Append into rowString of the particular row the color, the bannnerlines, and the rest back to black.
+					rowString[row] += color + bannerlines[post+1+row] + "\033[0m" // Append into rowString of the particular row the color, the bannnerlines, and the rest back to black.
 				} else {
-					rowString[row] += bannerlines[row+post] // Else return the bannerlines of that particular row into rowString.
+					rowString[row] += bannerlines[post+1+row] // Else return the bannerlines of that particular row into rowString.
 				}
 			}
 			globalpos++ // Then loop over into the next character and iterate over again.
