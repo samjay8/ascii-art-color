@@ -4,7 +4,10 @@ import "strings"
 
 func ColoredPositions(input, substring string) []bool {
 
-	boolslice := make([]bool, len(input)) // This gives a slice of bool having the length of the input
+	// Create positions based on visible characters only (excluding newlines)
+	// This matches how AsciiArt processes input after splitting by newline
+	inputNoNewlines := strings.ReplaceAll(input, "\n", "")
+	boolslice := make([]bool, len(inputNoNewlines)) // This gives a slice of bool having the length of the input without newlines
 
 	if substring == "" {
 		for i := range boolslice {
@@ -13,8 +16,9 @@ func ColoredPositions(input, substring string) []bool {
 		return boolslice
 
 	} else {
-		for pos := 0; pos <= len(input); pos++ {
-			find := strings.Index(input[pos:], substring) // This locates the index of the first instance of substring in the input
+		pos := 0
+		for pos < len(inputNoNewlines) {
+			find := strings.Index(inputNoNewlines[pos:], substring) // This locates the index of the first instance of substring in the input
 			if find == -1 {
 				break // If it is at its end, it breaks!
 			}
